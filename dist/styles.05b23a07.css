@@ -1,0 +1,58 @@
+html, body{
+    padding: 0;
+    margin: 0;
+}
+
+.plugin-container{
+    position: relative;
+    width: 100vw;
+    height: calc(100vw / 16 * 9);
+    overflow: hidden;
+}
+
+.plugin-container svg{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.plugin-container svg .cls-2 image{
+    transition: all 0.2s ease;
+}
+
+.plugin-container svg path:hover,
+.plugin-container svg .cls-2 image{
+    transform: scale(1.2);
+}
+
+.pulugin-container__canvas{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    border: 2px solid red;
+}
+
+.pulugin-container__img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 100vw;
+    height: calc(100vw / 16 * 9);
+}
+
+.plugin-container__buttons{
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    z-index: 4;
+}
+
+/*# sourceMappingURL=/styles.05b23a07.css.map */
