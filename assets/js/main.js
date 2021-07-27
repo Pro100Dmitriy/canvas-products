@@ -1,3 +1,5 @@
+import '../sass/main.sass'
+
 document.addEventListener('DOMContentLoaded', event => {
 
 

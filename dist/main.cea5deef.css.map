@@ -1,0 +1,1 @@
+{"version":3,"sources":["assets\\sass\\main.sass"],"names":[],"mappings":"AAEQ;EACI","file":"main.cea5deef.css","sourceRoot":"..","sourcesContent":[".plugin-container\r\n    &:hover\r\n        .cls-1\r\n            transform: scale(1.2)"]}
