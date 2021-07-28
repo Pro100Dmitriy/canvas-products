@@ -1,9 +1,157 @@
-.plugin-container {
-  background: black;
+html {
+  font-size: 15px;
 }
 
-.svg_mask_img_6:hover #test_svg .cls-1, .svg_mask_img_6:hover #test_svg .cls-2, .svg_mask_img_6:hover #test_svg .cls-3, .svg_mask_img_6:hover #test_svg .cls-4, .svg_mask_img_6:hover #test_svg .cls-5 {
-  fill: gray;
+.first-section {
+  position: relative;
+  width: 100%;
+  height: 850px;
+  overflow: hidden;
+}
+.first-section .blueins-img-header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.overlay-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+}
+.overlay-container__relative {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+.overlay-container__relative .overlay-container__bg {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(128, 128, 128, 0.5);
+  z-index: 1;
+}
+.overlay-container__relative .overlay-container__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 100px;
+  height: 100px;
+  background: white;
+}
+
+.plugin-container {
+  position: relative;
+  width: 100vw;
+  height: calc(100vw / 16 * 9);
+  overflow: hidden;
+  background: black;
+  transition: all 0.1s ease;
+}
+.plugin-container__title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.plugin-container__title h1 {
+  font-family: PlayfairDisplay;
+  font-weight: 400;
+  font-size: 3.5rem;
+  color: white;
+}
+.plugin-container__title__list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.plugin-container__title__list__item {
+  margin-top: 1.6rem;
+  padding: 0 1.26rem;
+}
+.plugin-container__title__list__item .light-seventeen {
+  font-size: 1.13rem;
+  font-family: "Jost";
+  font-weight: 300;
+  letter-spacing: 0.05rem;
+  line-height: 2rem;
+  color: white;
+  text-decoration: none;
+  position: relative;
+}
+.plugin-container__title__list__item .light-seventeen::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0%;
+  width: 0%;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+}
+.plugin-container__title__list__item .light-seventeen:hover::after {
+  width: 100%;
+}
+.plugin-container .tooltip {
+  position: absolute;
+  background: white;
+  z-index: 100;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0px #0000007a;
+  padding: 0.5rem 1rem;
+  font-family: Jost;
+}
+.plugin-container .tooltip .tooltip-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.plugin-container .tooltip .tooltip-price {
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.05rem;
+  line-height: 2rem;
+}
+.plugin-container svg polygon, .plugin-container svg path {
+  transition: all 0.1s ease;
+}
+.plugin-container #main_svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 100%;
+}
+.plugin-container #overlay_svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  opacity: 0;
+  width: 100%;
+}
+.plugin-container__img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 100vw;
+  height: calc(100vw / 16 * 9);
+  transition: all 0.1s ease;
 }
 
 /*# sourceMappingURL=/main.cea5deef.css.map */

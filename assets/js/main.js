@@ -1,156 +1,77 @@
 import '../sass/main.sass'
+import { tooltip, overlay } from './tooltip'
+import { product_data } from './data'
+import { css } from './utils'
 
-document.addEventListener('DOMContentLoaded', event => {
+function svghover( $container, { main_svg_ID, overflow_svg_ID, img_ID }, prod_data ){
 
+    const main_svg = $container.querySelector(main_svg_ID)
+    const overflow_svg = $container.querySelector(overflow_svg_ID)
+    const img = $container.querySelector(img_ID)
 
-//const $IMG = document.getElementById('plugin-img').getBoundingClientRect()
-//const WIDTH = $IMG.width
-//const HEIGHT = $IMG.height
-//const DPI_WIDTH = WIDTH * 2
-//const DPI_HEIGHT = HEIGHT * 2
+    const over_polygon = overflow_svg.querySelectorAll('polygon')
+    const over_path = overflow_svg.querySelectorAll('path')
+    const main_polygon = main_svg.querySelectorAll('polygon')
+    const main_path = main_svg.querySelectorAll('path')
+    const tip = tooltip( $container.querySelector('[data-el="tooltip"]') )
+    const title = $container.querySelector('[data-el="title"]')
+    const over = overlay( document.querySelector('[data-el="overlay"]') )
 
+    over_polygon.forEach( polygon => polygon.addEventListener('mousemove', mousemove) )
+    over_path.forEach( path => path.addEventListener('mousemove', mousemove) )
 
-function chart( canvas, data ){
-    const ctx = canvas.getContext('2d')
-    canvas.style.width = WIDTH + 'px'
-    canvas.style.height = HEIGHT + 'px'
-    canvas.width = DPI_WIDTH
-    canvas.height = DPI_HEIGHT
+    over_polygon.forEach( polygon => polygon.addEventListener('mouseleave', mouseleave) )
+    over_path.forEach( path => path.addEventListener('mouseleave', mouseleave) )
 
-    let renderPoints = []
+    over_polygon.forEach( polygon => polygon.addEventListener('click', click) )
+    over_path.forEach( path => path.addEventListener('click', click) )
 
-    function render(){
-        ctx.beginPath()
-        ctx.lineWidth = 4
-        ctx.strokeStyle = "red"
-        for(const [x, y] of renderPoints){
-            ctx.lineTo(x, y)
-        }
-        ctx.stroke()
-        ctx.closePath()
+    function mousemove( { target, clientX, clientY } ){
+        let el_class = target.getAttribute('class')
+        css( title, {display: 'none'} )
 
-        render_from_LC()
-    }
-
-    function render_from_LC(){
-        let all_path = []
-        if( localStorage.getItem('path') ){
-            all_path = JSON.parse( localStorage.getItem('path') ) 
-        }
-
-        all_path.forEach( item => {
-            ctx.beginPath()
-            ctx.lineWidth = 4
-            ctx.strokeStyle = "red"
-            for(const [x, y] of item.path){
-                ctx.lineTo(x, y)
+        const polygoHover = ( figure, index, array ) => {
+            if( figure.getAttribute('class') != el_class ){
+                img.style = 'opacity: 0.25'  
+                figure.style = 'fill: #3e3e3e;'               
+            }else{
+                figure.style = 'fill: white;'
+                let el_class = figure.getAttribute('class')
+                const data = {
+                    title: prod_data[el_class].title,
+                    price: prod_data[el_class].price
+                }
+                tip.show({
+                    left: clientX,
+                    top: clientY
+                }, data)
             }
-            ctx.stroke()
-            ctx.closePath()
-        } )
-        
-    }
-
-    function click(event){
-        let x = event.clientX
-        let y = event.clientY
-
-        renderPoints.push([x * 2, y * 2])
-        
-        render()
-    }
-    canvas.addEventListener('click', click)
-
-
-    let new_path = document.getElementById('new-path')
-    let finish_path = document.getElementById('finish-path')
-    let save_path = document.getElementById('save-path')
-
-    new_path.addEventListener('click', new_path_func)
-    finish_path.addEventListener('click', finish_path_func)
-    save_path.addEventListener('click', save_path_func)
-
-    function new_path_func(event){
-        canvas.addEventListener('click', click)
-    }
-    function finish_path_func(event){
-        let x = renderPoints[0][0]
-        let y = renderPoints[0][1]
-
-        renderPoints.push([x, y])
-
-        render()
-        save_LC()
-        canvas.removeEventListener('click', click)
-        renderPoints = []
-    }
-    function save_path_func(event){
-        console.log('save')
-    }
-
-
-    function save_LC(){
-        let all_objects = []
-        if( localStorage.getItem('path') ){
-            all_objects = JSON.parse( localStorage.getItem('path') ) 
         }
-        
-        let product = {
-            id: '1',
-            color: 'red',
-            path: renderPoints,
-            points: devider(renderPoints)
-        }
-
-        all_objects.push( product )
-
-        localStorage.removeItem( 'path' )
-        //localStorage.setItem( 'path', JSON.stringify( all_objects ) )
+        main_polygon.forEach( polygoHover )
+        main_path.forEach( polygoHover )
     }
 
+    function mouseleave(event){
+        tip.hide()
+        css( title, {display: 'block'} )
 
-    function devider(rendPoints){
-        let x = rendPoints.map( item => item[0] )
-
-        let minX = Math.min( ...x )
-        let maxX = Math.max( ...x )
-
-        let points_array = []
-
-        for(let x = minX; x < maxX; x++){
-            renderPoints.forEach( (point, index) => {
-                console.log( intersection( x, [point, rendPoints[index+1]] ) )
-                // if( intersection( x, [point, rendPoints[index+1]] ) != [] ){
-                //     points_array.push( intersection( x, [point, rendPoints[index+1]] ) )
-                // }
-            } )
+        const polygonLeave = ( figure, index, array ) => {
+            img.style = 'opacity: 1'
+            figure.style = 'fill: white;'
         }
-
-        return null
+        main_polygon.forEach( polygonLeave )
+        main_path.forEach( polygonLeave )
     }
 
-
-    function intersection( x, line ){
-        let k = ( line[1][1] - line[0][1] ) / ( line[1][0] - line[0][0] )
-        let b = line[0][1] - k * line[0][0]
-
-        if( x >= line[0][0] && x <= line[1][0] ){
-            return  [x, k*x+b]
-        }else{
-            return false
-        }
+    function click(evenr){
+        over.show()
     }
-
-
-    render()
 
 }
 
 
-//chart( document.getElementById('plugin-canvas'), [] )
-
-
-
-
-
-} )
+svghover( document.querySelector('.plugin-container'), {
+    main_svg_ID: '#main_svg',
+    overflow_svg_ID: '#overlay_svg',
+    img_ID: '#plugin-img'
+}, product_data )

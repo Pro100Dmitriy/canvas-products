@@ -189,197 +189,244 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"assets/js/main.js":[function(require,module,exports) {
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"assets/js/utils.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.css = css;
+
+function css(el) {
+  var styles = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  Object.assign(el.style, styles);
+}
+},{}],"assets/js/tooltip.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.tooltip = tooltip;
+exports.overlay = overlay;
+
+var _utils = require("./utils");
+
+var template = function template(data) {
+  return "\n    <div class=\"tooltip-title\">".concat(data.title, "</div>\n    <div class=\"tooltip-price\">").concat(data.price, "</div>\n");
+};
+
+function tooltip($el) {
+  var clear = function clear() {
+    $el.innerHTML = '';
+  };
+
+  return {
+    show: function show(_ref, data) {
+      var left = _ref.left,
+          top = _ref.top;
+
+      var _$el$getBoundingClien = $el.getBoundingClientRect(),
+          height = _$el$getBoundingClien.height,
+          width = _$el$getBoundingClien.width;
+
+      clear();
+      (0, _utils.css)($el, {
+        display: 'block',
+        top: top + height - 20 + 'px',
+        left: left + width / 3 + 'px'
+      });
+      $el.insertAdjacentHTML('afterbegin', template(data));
+    },
+    hide: function hide() {
+      (0, _utils.css)($el, {
+        display: 'none'
+      });
+    }
+  };
+}
+
+var overlay_template = function overlay_template(data) {
+  return "\n    <div class=\"overlay-container__content__img\">\n        <img src=\"#\" alt=\"image\">\n    </div>\n    <div class=\"overlay-container__content__text\">\n        <h3>\u041F\u043B\u0435\u0434 1</h3>\n    </div>\n";
+};
+
+function overlay($el) {
+  var content = $el.querySelector('.overlay-container__content');
+
+  var clear = function clear() {
+    content.innerHTML = '';
+  };
+
+  return {
+    show: function show() {
+      clear();
+      (0, _utils.css)($el, {
+        display: 'block'
+      });
+      content.insertAdjacentHTML('afterbegin', overlay_template());
+    },
+    hide: function hide() {
+      (0, _utils.css)($el, {
+        display: 'none'
+      });
+    }
+  };
+}
+},{"./utils":"assets/js/utils.js"}],"assets/js/data.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.product_data = void 0;
+var product_data = {
+  'cls-1': {
+    id: 1,
+    title: 'Плед 1',
+    price: 11 + ' BYN',
+    description: 'Психосоматика значительно просветляет индивидуальный блеск, независимо от психического состояния пациента.',
+    img: ''
+  },
+  'cls-2': {
+    id: 2,
+    title: 'Плед 2',
+    price: 22 + ' BYN',
+    description: 'Все это побудило нас обратить внимание на то, что фаза возможна.',
+    img: ''
+  },
+  'cls-3': {
+    id: 3,
+    title: 'Плед 3',
+    price: 33 + ' BYN',
+    description: 'Краевая часть артезианского бассейна колеблет тектонический психоз. Плато однократно.',
+    img: ''
+  },
+  'cls-4': {
+    id: 4,
+    title: 'Плед 4',
+    price: 44 + ' BYN',
+    description: 'Психосоматика значительно просветляет индивидуальный блеск, независимо от психического состояния пациента. Все это побудило нас обратить внимание на то, что фаза возможна. Краевая часть артезианского бассейна колеблет тектонический психоз. Плато однократно.',
+    img: ''
+  },
+  'cls-5': {
+    id: 5,
+    title: 'Плед 5',
+    price: 55 + ' BYN',
+    description: 'Психосоматика значительно просветляет индивидуальный блеск, независимо от психического состояния пациента. Все это побудило нас обратить внимание на то, что фаза возможна. Краевая часть артезианского бассейна колеблет тектонический психоз. Плато однократно.',
+    img: ''
+  },
+  'cls-6': {
+    id: 6,
+    title: 'Плед 6',
+    price: 66 + ' BYN',
+    description: 'Психосоматика значительно просветляет индивидуальный блеск, независимо от психического состояния пациента. Все это побудило нас обратить внимание на то, что фаза возможна. Краевая часть артезианского бассейна колеблет тектонический психоз. Плато однократно.',
+    img: ''
+  }
+};
+exports.product_data = product_data;
+},{}],"assets/js/main.js":[function(require,module,exports) {
 "use strict";
 
 require("../sass/main.sass");
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+var _tooltip = require("./tooltip");
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+var _data = require("./data");
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+var _utils = require("./utils");
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function svghover($container, _ref, prod_data) {
+  var main_svg_ID = _ref.main_svg_ID,
+      overflow_svg_ID = _ref.overflow_svg_ID,
+      img_ID = _ref.img_ID;
+  var main_svg = $container.querySelector(main_svg_ID);
+  var overflow_svg = $container.querySelector(overflow_svg_ID);
+  var img = $container.querySelector(img_ID);
+  var over_polygon = overflow_svg.querySelectorAll('polygon');
+  var over_path = overflow_svg.querySelectorAll('path');
+  var main_polygon = main_svg.querySelectorAll('polygon');
+  var main_path = main_svg.querySelectorAll('path');
+  var tip = (0, _tooltip.tooltip)($container.querySelector('[data-el="tooltip"]'));
+  var title = $container.querySelector('[data-el="title"]');
+  var over = (0, _tooltip.overlay)(document.querySelector('[data-el="overlay"]'));
+  over_polygon.forEach(function (polygon) {
+    return polygon.addEventListener('mousemove', mousemove);
+  });
+  over_path.forEach(function (path) {
+    return path.addEventListener('mousemove', mousemove);
+  });
+  over_polygon.forEach(function (polygon) {
+    return polygon.addEventListener('mouseleave', mouseleave);
+  });
+  over_path.forEach(function (path) {
+    return path.addEventListener('mouseleave', mouseleave);
+  });
+  over_polygon.forEach(function (polygon) {
+    return polygon.addEventListener('click', click);
+  });
+  over_path.forEach(function (path) {
+    return path.addEventListener('click', click);
+  });
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+  function mousemove(_ref2) {
+    var target = _ref2.target,
+        clientX = _ref2.clientX,
+        clientY = _ref2.clientY;
+    var el_class = target.getAttribute('class');
+    (0, _utils.css)(title, {
+      display: 'none'
+    });
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-document.addEventListener('DOMContentLoaded', function (event) {
-  //const $IMG = document.getElementById('plugin-img').getBoundingClientRect()
-  //const WIDTH = $IMG.width
-  //const HEIGHT = $IMG.height
-  //const DPI_WIDTH = WIDTH * 2
-  //const DPI_HEIGHT = HEIGHT * 2
-  function chart(canvas, data) {
-    var ctx = canvas.getContext('2d');
-    canvas.style.width = WIDTH + 'px';
-    canvas.style.height = HEIGHT + 'px';
-    canvas.width = DPI_WIDTH;
-    canvas.height = DPI_HEIGHT;
-    var renderPoints = [];
-
-    function render() {
-      ctx.beginPath();
-      ctx.lineWidth = 4;
-      ctx.strokeStyle = "red";
-
-      var _iterator = _createForOfIteratorHelper(renderPoints),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var _step$value = _slicedToArray(_step.value, 2),
-              x = _step$value[0],
-              y = _step$value[1];
-
-          ctx.lineTo(x, y);
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      ctx.stroke();
-      ctx.closePath();
-      render_from_LC();
-    }
-
-    function render_from_LC() {
-      var all_path = [];
-
-      if (localStorage.getItem('path')) {
-        all_path = JSON.parse(localStorage.getItem('path'));
-      }
-
-      all_path.forEach(function (item) {
-        ctx.beginPath();
-        ctx.lineWidth = 4;
-        ctx.strokeStyle = "red";
-
-        var _iterator2 = _createForOfIteratorHelper(item.path),
-            _step2;
-
-        try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var _step2$value = _slicedToArray(_step2.value, 2),
-                x = _step2$value[0],
-                y = _step2$value[1];
-
-            ctx.lineTo(x, y);
-          }
-        } catch (err) {
-          _iterator2.e(err);
-        } finally {
-          _iterator2.f();
-        }
-
-        ctx.stroke();
-        ctx.closePath();
-      });
-    }
-
-    function click(event) {
-      var x = event.clientX;
-      var y = event.clientY;
-      renderPoints.push([x * 2, y * 2]);
-      render();
-    }
-
-    canvas.addEventListener('click', click);
-    var new_path = document.getElementById('new-path');
-    var finish_path = document.getElementById('finish-path');
-    var save_path = document.getElementById('save-path');
-    new_path.addEventListener('click', new_path_func);
-    finish_path.addEventListener('click', finish_path_func);
-    save_path.addEventListener('click', save_path_func);
-
-    function new_path_func(event) {
-      canvas.addEventListener('click', click);
-    }
-
-    function finish_path_func(event) {
-      var x = renderPoints[0][0];
-      var y = renderPoints[0][1];
-      renderPoints.push([x, y]);
-      render();
-      save_LC();
-      canvas.removeEventListener('click', click);
-      renderPoints = [];
-    }
-
-    function save_path_func(event) {
-      console.log('save');
-    }
-
-    function save_LC() {
-      var all_objects = [];
-
-      if (localStorage.getItem('path')) {
-        all_objects = JSON.parse(localStorage.getItem('path'));
-      }
-
-      var product = {
-        id: '1',
-        color: 'red',
-        path: renderPoints,
-        points: devider(renderPoints)
-      };
-      all_objects.push(product);
-      localStorage.removeItem('path'); //localStorage.setItem( 'path', JSON.stringify( all_objects ) )
-    }
-
-    function devider(rendPoints) {
-      var x = rendPoints.map(function (item) {
-        return item[0];
-      });
-      var minX = Math.min.apply(Math, _toConsumableArray(x));
-      var maxX = Math.max.apply(Math, _toConsumableArray(x));
-      var points_array = [];
-
-      var _loop = function _loop(_x) {
-        renderPoints.forEach(function (point, index) {
-          console.log(intersection(_x, [point, rendPoints[index + 1]])); // if( intersection( x, [point, rendPoints[index+1]] ) != [] ){
-          //     points_array.push( intersection( x, [point, rendPoints[index+1]] ) )
-          // }
-        });
-      };
-
-      for (var _x = minX; _x < maxX; _x++) {
-        _loop(_x);
-      }
-
-      return null;
-    }
-
-    function intersection(x, line) {
-      var k = (line[1][1] - line[0][1]) / (line[1][0] - line[0][0]);
-      var b = line[0][1] - k * line[0][0];
-
-      if (x >= line[0][0] && x <= line[1][0]) {
-        return [x, k * x + b];
+    var polygoHover = function polygoHover(figure, index, array) {
+      if (figure.getAttribute('class') != el_class) {
+        img.style = 'opacity: 0.25';
+        figure.style = 'fill: #3e3e3e;';
       } else {
-        return false;
+        figure.style = 'fill: white;';
+
+        var _el_class = figure.getAttribute('class');
+
+        var data = {
+          title: prod_data[_el_class].title,
+          price: prod_data[_el_class].price
+        };
+        tip.show({
+          left: clientX,
+          top: clientY
+        }, data);
       }
-    }
+    };
 
-    render();
-  } //chart( document.getElementById('plugin-canvas'), [] )
+    main_polygon.forEach(polygoHover);
+    main_path.forEach(polygoHover);
+  }
 
-});
-},{"../sass/main.sass":"assets/sass/main.sass"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+  function mouseleave(event) {
+    tip.hide();
+    (0, _utils.css)(title, {
+      display: 'block'
+    });
+
+    var polygonLeave = function polygonLeave(figure, index, array) {
+      img.style = 'opacity: 1';
+      figure.style = 'fill: white;';
+    };
+
+    main_polygon.forEach(polygonLeave);
+    main_path.forEach(polygonLeave);
+  }
+
+  function click(evenr) {
+    over.show();
+  }
+}
+
+svghover(document.querySelector('.plugin-container'), {
+  main_svg_ID: '#main_svg',
+  overflow_svg_ID: '#overlay_svg',
+  img_ID: '#plugin-img'
+}, _data.product_data);
+},{"../sass/main.sass":"assets/sass/main.sass","./tooltip":"assets/js/tooltip.js","./data":"assets/js/data.js","./utils":"assets/js/utils.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -407,7 +454,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50119" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53713" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
