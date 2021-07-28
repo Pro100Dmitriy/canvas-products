@@ -1,0 +1,54 @@
+.close-button
+    text-indent: -999em
+    width: 2.5rem
+    height: 2.5rem
+    background: rgba($dark-light, 0.1)
+    border-radius: 50%
+    border: none
+    position: relative
+    outline: none
+    &:hover
+        background: rgba($dark-light, 0.1) !important
+        &::before
+            transform: translate(-50%, -50%) rotate(0deg)
+            background: $blue
+        &::after
+            transform: translate(-50%, -50%) rotate(0deg)
+            background: $blue
+    &::before
+        content: ''
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%) rotate(45deg)
+        width: 50%
+        height: 2px
+        background: $dark-light
+        transition: all 0.3s ease
+    &::after
+        content: ''
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%) rotate(-45deg)
+        width: 50%
+        height: 2px
+        background: $dark-light
+        transition: all 0.3s ease
+
+
+.el-form__button
+    padding: .534em 1.828em
+    font-size: 1.13rem
+    font-weight: 500
+    letter-spacing: .05rem
+    line-height: 2rem
+    color: white
+    background: #17191a
+    border: none
+    border-radius: 0
+    transition: all .3s ease
+    font-family: Jost
+    display: inline-block
+    &:hover
+        background: #70A0C4

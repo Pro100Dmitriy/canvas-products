@@ -1,3 +1,4 @@
+import "./import-liberis"
 import '../sass/main.sass'
 import { tooltip, overlay } from './tooltip'
 import { product_data } from './data'
@@ -63,8 +64,23 @@ function svghover( $container, { main_svg_ID, overflow_svg_ID, img_ID }, prod_da
         main_path.forEach( polygonLeave )
     }
 
-    function click(evenr){
-        over.show()
+    function click( { target } ){
+        const over_data = prod_data[ target.getAttribute('class') ]
+
+        over.show({
+            title: over_data.title,
+            price: over_data.price,
+            description: over_data.description,
+            img: over_data.img
+        })
+
+        document.querySelector('#close-overlay-menu-button').addEventListener( 'click', e => over.hide() )
+
+        $("#overlay-slick").slick({
+            infinite: true,
+            dots: false
+          });
+
     }
 
 }

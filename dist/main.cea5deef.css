@@ -1,3 +1,65 @@
+.close-button {
+  text-indent: -999em;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(79, 86, 91, 0.1);
+  border-radius: 50%;
+  border: none;
+  position: relative;
+  outline: none;
+}
+.close-button:hover {
+  background: rgba(79, 86, 91, 0.1) !important;
+}
+.close-button:hover::before {
+  transform: translate(-50%, -50%) rotate(0deg);
+  background: #70A0C4;
+}
+.close-button:hover::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+  background: #70A0C4;
+}
+.close-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 50%;
+  height: 2px;
+  background: #4F565B;
+  transition: all 0.3s ease;
+}
+.close-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: 50%;
+  height: 2px;
+  background: #4F565B;
+  transition: all 0.3s ease;
+}
+
+.el-form__button {
+  padding: 0.534em 1.828em;
+  font-size: 1.13rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  line-height: 2rem;
+  color: white;
+  background: #17191a;
+  border: none;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  font-family: Jost;
+  display: inline-block;
+}
+.el-form__button:hover {
+  background: #70A0C4;
+}
+
 html {
   font-size: 15px;
 }
@@ -37,25 +99,96 @@ html {
   height: 100vh;
   background: rgba(128, 128, 128, 0.5);
   z-index: 1;
+  opacity: 0;
+  transition: all 0.3s ease;
 }
 .overlay-container__relative .overlay-container__content {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 2;
-  width: 100px;
-  height: 100px;
   background: white;
+  display: flex;
+  opacity: 0;
+  transform: scale(0.8) translate(-50%, -50%);
+  transition: all 0.3s ease;
+  -webkit-transform-origin: top center;
+  -moz-transform-origin: top center;
+  -o-transform-origin: top center;
+  transform-origin: top center;
 }
-
+.overlay-container__relative .overlay-container__content .slick-slider {
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
+.overlay-container__relative .overlay-container__content .slick-slider .slick-prev {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.overlay-container__relative .overlay-container__content .slick-slider .slick-next {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.overlay-container__relative .overlay-container__content .slick-slider .slick-list {
+  width: 500px;
+  height: 500px;
+}
+.overlay-container__relative .overlay-container__content .slick-slider .slick-list .slick-slide .slick-item {
+  width: 500px;
+  height: 500px;
+}
+.overlay-container__relative .overlay-container__content .slick-slider .slick-list .slick-slide .slick-item img {
+  width: 100%;
+}
+.overlay-container__relative .overlay-container__content__text {
+  width: calc(400px - 2.5rem * 2);
+  padding: 1.5rem 2.5rem;
+}
+.overlay-container__relative .overlay-container__content__text .close-overlay-button {
+  display: flex;
+  justify-content: flex-end;
+}
+.overlay-container__relative .overlay-container__content__text .close-overlay-button .close-button {
+  background: none;
+}
+.overlay-container__relative .overlay-container__content__text h3 {
+  font-size: 1.4rem;
+  font-family: "Jost";
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #17191A;
+}
+.overlay-container__relative .overlay-container__content__text .overlay-rating {
+  font-size: 1.13rem;
+  font-family: Jost;
+  font-weight: 300;
+  letter-spacing: 0.05rem;
+  line-height: 2rem;
+  color: #4F565B;
+}
+.overlay-container__relative .overlay-container__content__text .overlay-description {
+  color: #4F565B;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  font-family: Jost;
+  font-weight: 400;
+  letter-spacing: 0.05rem;
+  line-height: 2rem;
+}
 .plugin-container {
   position: relative;
   width: 100vw;
   height: calc(100vw / 16 * 9);
   overflow: hidden;
   background: black;
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
 }
 .plugin-container__title {
   position: absolute;
@@ -63,6 +196,9 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
+  top: 60% !important;
+  opacity: 1;
+  transition: all 0.3s ease;
 }
 .plugin-container__title h1 {
   font-family: PlayfairDisplay;
@@ -124,7 +260,7 @@ html {
   line-height: 2rem;
 }
 .plugin-container svg polygon, .plugin-container svg path {
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
 }
 .plugin-container #main_svg {
   position: absolute;
@@ -151,7 +287,7 @@ html {
   z-index: 1;
   width: 100vw;
   height: calc(100vw / 16 * 9);
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
 }
 
 /*# sourceMappingURL=/main.cea5deef.css.map */

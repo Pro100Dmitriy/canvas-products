@@ -1,4 +1,6 @@
+@import 'color'
 @import 'mixin'
+@import 'ux'
 
 html
     font-size: 15px
@@ -27,11 +29,77 @@ html
             height: 100vh
             background: rgba( gray, 0.5 )
             z-index: 1
+            opacity: 0
+            transition: all 0.3s ease
         .overlay-container__content
-            @include center-pos(2)
-            width: 100px
-            height: 100px
+            position: absolute
+            top: 50%
+            left: 50%
+            z-index: 2
             background: white
+            display: flex
+            opacity: 0
+            transform: scale(0.8) translate(-50%, -50%)
+            transition: all 0.3s ease
+            -webkit-transform-origin: top center
+            -moz-transform-origin: top center
+            -o-transform-origin: top center
+            transform-origin: top center
+            .slick-slider
+                position: relative
+                width: 500px
+                height: 500px
+                .slick-prev
+                    position: absolute
+                    top: 50%
+                    left: 30px
+                    transform: translateY(-50%)
+                    z-index: 2
+                .slick-next
+                    position: absolute
+                    top: 50%
+                    right: 30px
+                    transform: translateY(-50%)
+                    z-index: 2
+                .slick-list
+                    width: 500px
+                    height: 500px
+                    .slick-slide
+                        .slick-item
+                            width: 500px
+                            height: 500px
+                            img
+                                width: 100%
+            &__text
+                width: calc(400px - 2.5rem * 2)
+                padding: 1.5rem 2.5rem
+                .close-overlay-button
+                    display: flex
+                    justify-content: flex-end
+                    .close-button
+                        background: none
+                h3
+                    font-size: 1.4rem
+                    font-family: 'Jost'
+                    font-weight: 500
+                    letter-spacing: 0
+                    color: $dark
+                .overlay-rating
+                    font-size: 1.13rem
+                    font-family: Jost
+                    font-weight: 300
+                    letter-spacing: .05rem
+                    line-height: 2rem
+                    color: $dark-light
+                .overlay-description
+                    color: $dark-light
+                    margin-bottom: 2rem
+                    font-size: 1rem
+                    font-family: Jost
+                    font-weight: 400
+                    letter-spacing: .05rem
+                    line-height: 2rem
+                .overlay-add-to-cart  
 
 
 .plugin-container
@@ -40,9 +108,12 @@ html
     height: calc(100vw / 16 * 9)
     overflow: hidden
     background: black
-    transition: all 0.1s ease
+    transition: all 0.2s ease
     &__title
         @include center-pos(5)
+        top: 60% !important
+        opacity: 1
+        transition: all 0.3s ease
         h1
             font-family: PlayfairDisplay
             font-weight: 400
@@ -96,7 +167,7 @@ html
             line-height: 2rem
     svg
         polygon, path
-            transition: all 0.1s ease
+            transition: all 0.2s ease
     #main_svg
         @include center-pos(2)
         width: 100%
@@ -108,4 +179,4 @@ html
         @include center-pos
         width: 100vw
         height: calc(100vw / 16 * 9)
-        transition: all 0.1s ease
+        transition: all 0.2s ease
