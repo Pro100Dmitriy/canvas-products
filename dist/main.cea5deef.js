@@ -217,12 +217,11 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  var $IMG = document.getElementById('plugin-img').getBoundingClientRect();
-  var WIDTH = $IMG.width;
-  var HEIGHT = $IMG.height;
-  var DPI_WIDTH = WIDTH * 2;
-  var DPI_HEIGHT = HEIGHT * 2;
-
+  //const $IMG = document.getElementById('plugin-img').getBoundingClientRect()
+  //const WIDTH = $IMG.width
+  //const HEIGHT = $IMG.height
+  //const DPI_WIDTH = WIDTH * 2
+  //const DPI_HEIGHT = HEIGHT * 2
   function chart(canvas, data) {
     var ctx = canvas.getContext('2d');
     canvas.style.width = WIDTH + 'px';
@@ -377,9 +376,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
     }
 
     render();
-  }
+  } //chart( document.getElementById('plugin-canvas'), [] )
 
-  chart(document.getElementById('plugin-canvas'), []);
 });
 },{"../sass/main.sass":"assets/sass/main.sass"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -409,7 +407,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53406" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50119" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

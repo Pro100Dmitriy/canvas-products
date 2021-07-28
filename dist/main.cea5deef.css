@@ -1,5 +1,9 @@
-.plugin-container:hover .cls-1 {
-  transform: scale(1.2);
+.plugin-container {
+  background: black;
+}
+
+.svg_mask_img_6:hover #test_svg .cls-1, .svg_mask_img_6:hover #test_svg .cls-2, .svg_mask_img_6:hover #test_svg .cls-3, .svg_mask_img_6:hover #test_svg .cls-4, .svg_mask_img_6:hover #test_svg .cls-5 {
+  fill: gray;
 }
 
 /*# sourceMappingURL=/main.cea5deef.css.map */

@@ -3,11 +3,11 @@ import '../sass/main.sass'
 document.addEventListener('DOMContentLoaded', event => {
 
 
-const $IMG = document.getElementById('plugin-img').getBoundingClientRect()
-const WIDTH = $IMG.width
-const HEIGHT = $IMG.height
-const DPI_WIDTH = WIDTH * 2
-const DPI_HEIGHT = HEIGHT * 2
+//const $IMG = document.getElementById('plugin-img').getBoundingClientRect()
+//const WIDTH = $IMG.width
+//const HEIGHT = $IMG.height
+//const DPI_WIDTH = WIDTH * 2
+//const DPI_HEIGHT = HEIGHT * 2
 
 
 function chart( canvas, data ){
@@ -147,7 +147,10 @@ function chart( canvas, data ){
 }
 
 
-chart( document.getElementById('plugin-canvas'), [] )
+//chart( document.getElementById('plugin-canvas'), [] )
+
+
+
 
 
 } )
