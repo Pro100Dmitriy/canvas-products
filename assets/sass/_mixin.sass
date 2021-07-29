@@ -1,6 +1,6 @@
-@mixin center-pos( $zIndex: 1 )
+@mixin center-pos( $zIndex: 1, $top: 50%, $left: 50% )
     position: absolute
-    top: 50%
-    left: 50%
+    top: $top
+    left: $left
     transform: translate(-50%, -50%)
     z-index: $zIndex

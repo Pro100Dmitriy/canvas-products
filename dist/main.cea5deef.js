@@ -14525,13 +14525,23 @@ function svghover($container, _ref, prod_data) {
         clientY = _ref2.clientY;
     var el_class = target.getAttribute('class');
     (0, _utils.css)(title, {
-      display: 'none'
+      top: 65 + '%',
+      opacity: 0
     });
 
     var polygoHover = function polygoHover(figure, index, array) {
       if (figure.getAttribute('class') != el_class) {
-        img.style = 'opacity: 0.25';
-        figure.style = 'fill: #3e3e3e;';
+        (0, _utils.css)(img, {
+          opacity: 0.35,
+          filter: 'blur(1px)'
+        });
+        (0, _utils.css)(figure, {
+          fill: '#3e3e3e'
+        });
+        var indexAttr = figure.getAttribute('class').slice(-1);
+        (0, _utils.css)(document.querySelector('.svg_mask_img_' + indexAttr), {
+          filter: 'blue(1px)'
+        });
       } else {
         figure.style = 'fill: white;';
 
@@ -14555,12 +14565,22 @@ function svghover($container, _ref, prod_data) {
   function mouseleave(event) {
     tip.hide();
     (0, _utils.css)(title, {
-      display: 'block'
+      top: 60 + '%',
+      opacity: 1
     });
 
     var polygonLeave = function polygonLeave(figure, index, array) {
-      img.style = 'opacity: 1';
-      figure.style = 'fill: white;';
+      (0, _utils.css)(img, {
+        opacity: 1,
+        filter: 'blur(0px)'
+      });
+      (0, _utils.css)(figure, {
+        fill: 'white'
+      });
+      var indexAttr = figure.getAttribute('class').slice(-1);
+      (0, _utils.css)(document.querySelector('.svg_mask_img_' + indexAttr), {
+        filter: 'blur(0px)'
+      });
     };
 
     main_polygon.forEach(polygonLeave);
@@ -14619,7 +14639,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61294" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59162" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

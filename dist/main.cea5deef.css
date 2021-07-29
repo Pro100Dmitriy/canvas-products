@@ -112,10 +112,10 @@ html {
   opacity: 0;
   transform: scale(0.8) translate(-50%, -50%);
   transition: all 0.3s ease;
-  -webkit-transform-origin: top center;
-  -moz-transform-origin: top center;
-  -o-transform-origin: top center;
-  transform-origin: top center;
+  -webkit-transform-origin: center;
+  -moz-transform-origin: center;
+  -o-transform-origin: center;
+  transform-origin: center;
 }
 .overlay-container__relative .overlay-container__content .slick-slider {
   position: relative;
@@ -192,13 +192,12 @@ html {
 }
 .plugin-container__title {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
-  top: 60% !important;
   opacity: 1;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 .plugin-container__title h1 {
   font-family: PlayfairDisplay;
@@ -242,12 +241,13 @@ html {
 }
 .plugin-container .tooltip {
   position: absolute;
-  background: white;
+  backdrop-filter: blur(10px);
   z-index: 100;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0px #0000007a;
   padding: 0.5rem 1rem;
   font-family: Jost;
+  color: white;
 }
 .plugin-container .tooltip .tooltip-title {
   font-size: 1.1rem;

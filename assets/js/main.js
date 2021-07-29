@@ -29,12 +29,21 @@ function svghover( $container, { main_svg_ID, overflow_svg_ID, img_ID }, prod_da
 
     function mousemove( { target, clientX, clientY } ){
         let el_class = target.getAttribute('class')
-        css( title, {display: 'none'} )
+        css( title, {
+            top: 65 + '%',
+            opacity: 0
+        } )
 
         const polygoHover = ( figure, index, array ) => {
             if( figure.getAttribute('class') != el_class ){
-                img.style = 'opacity: 0.25'  
-                figure.style = 'fill: #3e3e3e;'               
+                css( img, {
+                    opacity: 0.35,
+                    filter: 'blur(1px)'
+                } ) 
+                css( figure, {fill: '#3e3e3e'} ) 
+                
+                let indexAttr = figure.getAttribute('class').slice(-1)
+                css( document.querySelector('.svg_mask_img_' + indexAttr), {filter: 'blue(1px)'} )
             }else{
                 figure.style = 'fill: white;'
                 let el_class = figure.getAttribute('class')
@@ -54,11 +63,20 @@ function svghover( $container, { main_svg_ID, overflow_svg_ID, img_ID }, prod_da
 
     function mouseleave(event){
         tip.hide()
-        css( title, {display: 'block'} )
+        css( title, {
+            top: 60 + '%',
+            opacity: 1
+        } )
 
         const polygonLeave = ( figure, index, array ) => {
-            img.style = 'opacity: 1'
-            figure.style = 'fill: white;'
+            css( img, {
+                opacity: 1,
+                filter: 'blur(0px)'
+            } )
+            css( figure, { fill: 'white' } )
+
+            let indexAttr = figure.getAttribute('class').slice(-1)
+            css( document.querySelector('.svg_mask_img_' + indexAttr), { filter: 'blur(0px)' } )
         }
         main_polygon.forEach( polygonLeave )
         main_path.forEach( polygonLeave )
